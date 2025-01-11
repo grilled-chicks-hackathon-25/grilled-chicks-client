@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router";
 import Header from "../components/common/Header";
 import styled from "@emotion/styled";
+import { useState } from "react";
 
 const Community = () => {
   const navigate = useNavigate();
   const isDone = false;
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const openInput = () => {
+    if (isDone) setIsOpen(true);
+  };
 
   return (
     <div className="h-full ">
@@ -22,6 +27,7 @@ const Community = () => {
       <div className="sticky p-4 top-11 bg-background-base-default">
         <p className="text-headlineAccent">전 애인이랑 헤어진 이유는?</p>
         <button
+          onClick={openInput}
           className="mt-4 w-full h-16 rounded-full border-[1px] border-background-base-border text-titleAccent bg-white disabled:text-contents-status-unselected"
           disabled={isDone}
         >

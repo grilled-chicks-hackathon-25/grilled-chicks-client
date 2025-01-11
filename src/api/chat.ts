@@ -10,7 +10,7 @@ interface IresChatMessageGetApi {
 const GetChatMessage = async (
   roomId: number
 ): Promise<IresChatMessageGetApi> => {
-  const { data } = await BaseInstance.get(`/room/${roomId}/messages`);
+  const { data } = await BaseInstance.get(`/chat/${roomId}/messages`);
   return data;
 };
 
