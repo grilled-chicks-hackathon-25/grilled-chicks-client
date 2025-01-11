@@ -1,3 +1,5 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCards } from 'swiper/modules';
 import ProfileCard from "../components/match/ProfileCard";
 
 function Match() {
@@ -9,7 +11,28 @@ function Match() {
                 </span>
             </div>
             <div className="flex flex-col py-4">
-                <ProfileCard imgUrl="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" name="원하늘" age={23} school="계원예술대학교 디지털미디어디자인과" mbti="ESTJ" />
+                <Swiper
+                    className='w-full'
+                    spaceBetween={4}
+                    slidesPerView={3}
+                    centeredSlides
+                    effect={'cards'}
+                    modules={[EffectCards]}
+                // allowTouchMove={false}
+                >
+                    <SwiperSlide className='px-4 w-fit'>
+                        <ProfileCard imgUrl="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" name="원하늘" age={23} school="계원예술대학교 디지털미디어디자인과" mbti="ESTJ" />
+                    </SwiperSlide>
+                    <SwiperSlide className='px-4'>
+                        <ProfileCard imgUrl="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" name="원하늘" age={23} school="계원예술대학교 디지털미디어디자인과" mbti="ESTJ" />
+                    </SwiperSlide>
+                    <SwiperSlide className='px-4'>
+                        <ProfileCard imgUrl="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" name="원하늘" age={23} school="계원예술대학교 디지털미디어디자인과" mbti="ESTJ" />
+                    </SwiperSlide>
+                    <SwiperSlide className='px-4'>
+                        <ProfileCard imgUrl="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" name="원하늘" age={23} school="계원예술대학교 디지털미디어디자인과" mbti="ESTJ" />
+                    </SwiperSlide>
+                </Swiper>
                 <div className="flex items-center gap-3 px-4 my-auto">
                     <div className="min-w-[72px] min-h-[72px] p-2 border border-background-base-border bg-background-base-elevated rounded-full flex items-center justify-center">
                         <span className="material-icons !text-[28px] text-contents-status-unabled">
@@ -24,12 +47,12 @@ function Match() {
                         </div>
                         <div className="w-full items-center justify-center p-2 border rounded-full h-[60px] flex border-background-base-border bg-[#F3F327]">
                             <span className="material-icons !text-[28px] text-[#000000]">
-                            swipe_right
+                                swipe_right
                             </span>
                         </div>
                         <div className="w-full items-center justify-center p-2 border rounded-full h-[60px] flex border-background-base-border bg-[#47EF44]">
                             <span className="material-icons !text-[28px] text-[#FFFFFF]">
-                            mode_comment
+                                mode_comment
                             </span>
                         </div>
                     </div>
