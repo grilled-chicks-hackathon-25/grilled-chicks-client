@@ -63,6 +63,7 @@ module.exports = {
         },
       },
       white: "#fff",
+      black: "#000",
     },
     fontSize: {
       displayDefault: ["48px", { fontWeight: 500, lineHeight: "60px" }],

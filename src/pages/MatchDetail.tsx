@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { MessageBtn } from "../components/common";
+import { ImgModal, MessageBtn } from "../components/common";
+import { useState } from "react";
 
 const imgData = [
   "https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png",
@@ -11,10 +12,15 @@ const imgData = [
 ];
 
 const MatchDetail = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const onModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <div>
+      {isModalOpen && <ImgModal src={imgData} onModal={onModal} />}
       <BgImg
-        src="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png"
+        src={imgData[0]}
         className="relative flex w-full p-4 align-bottom aspect-square "
       >
         <div className="z-10 mt-auto">
@@ -33,8 +39,12 @@ const MatchDetail = () => {
           우리 함께 작은 행복들을 찾아볼까요? 😊
         </p>
         <div className="flex gap-1 overflow-x-auto">
-          {imgData.map((item) => (
-            <button className="shrink-0 w-[100px] aspect-square rounded-lg">
+          {imgData.map((item, idx) => (
+            <button
+              className="shrink-0 w-[100px] aspect-square rounded-lg"
+              onClick={onModal}
+              key={idx}
+            >
               <img src={item} className="shrink" />
             </button>
           ))}
