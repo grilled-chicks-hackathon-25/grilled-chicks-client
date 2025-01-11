@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import Landing from "./pages/Landing";
-import { Layout } from "./components";
+import { Layout } from "./components/common";
 
 function App() {
   return (
