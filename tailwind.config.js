@@ -62,6 +62,7 @@ module.exports = {
           warning: "#F5C400",
         },
       },
+      white: "#fff",
     },
     fontSize: {
       displayDefault: ["48px", { fontWeight: 500, lineHeight: "60px" }],
