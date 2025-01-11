@@ -18,7 +18,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="z-40 rounded-t-xl bg-background-base-elevated border-background-base-border border-[1px]">
+    <nav className="nav-bar z-40 rounded-t-xl bg-background-base-elevated border-background-base-border border-[1px]">
       <ul className="flex">
         {navItem.map(({ href, label, icon }) => (
           <li className="w-full h-[50px]" key={href}>

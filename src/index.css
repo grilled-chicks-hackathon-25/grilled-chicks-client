@@ -147,3 +147,8 @@ table {
   font-weight: 200;
   font-style: normal;
 }
+/* .layout:has(input:focus) {
+  .nav-bar {
+    display: none;
+  }
+} */
