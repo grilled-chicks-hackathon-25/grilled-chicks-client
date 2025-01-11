@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { ImgModal, MessageBtn } from "../components/common";
 import { useState } from "react";
+import Header from "../components/common/Header";
+import { useNavigate } from "react-router";
 
 const imgData = [
   "https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png",
@@ -13,6 +15,7 @@ const imgData = [
 
 const MatchDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate()
   const onModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -23,6 +26,11 @@ const MatchDetail = () => {
         src={imgData[0]}
         className="relative flex w-full p-4 align-bottom aspect-square "
       >
+        <Header justify="start" isAbsolute>
+          <button className="material-icons text-[#FFFFFF] !text-[28px]" onClick={() => navigate("/match")} >
+            arrow_back_ios
+          </button>
+        </Header>
         <div className="z-10 mt-auto">
           <span className="text-white text-displayAccent">원하늘</span>
           <span className="mb-1 ml-1 text-white text-titleDefault">23살</span>
@@ -48,6 +56,34 @@ const MatchDetail = () => {
               <img src={item} className="shrink" />
             </button>
           ))}
+        </div>
+      </div>
+      <Line className="text-background-base-border" />
+      <div className="flex flex-col gap-2 p-4">
+        <div className="flex items-center gap-1 ">
+          <div className="w-[80px] flex gap-1 items-center">
+            <span className="material-icons !text-[20px] text-contents-default-tertiary">school</span>
+            <span className="text-captionDefault text-contents-default-tertiary">학교</span>
+          </div>
+          <span className="truncate text-captionDefault text-contents-default-primary">계원예술대학교 디지털미디어디자인과</span>
+        </div>
+        <div className="flex items-center gap-1 ">
+          <div className="w-[80px] flex gap-1 items-center">
+            <span className="material-symbols-outlined !text-[20px] text-contents-default-tertiary">
+              ar_on_you
+            </span>
+            <span className="text-captionDefault text-contents-default-tertiary">MBTI</span>
+          </div>
+          <span className="truncate text-captionDefault text-contents-default-primary">ESTJ</span>
+        </div>
+        <div className="flex items-center gap-1 ">
+          <div className="w-[80px] flex gap-1 items-center">
+            <span className="material-icons !text-[20px] text-contents-default-tertiary">
+              cake
+            </span>
+            <span className="text-captionDefault text-contents-default-tertiary">생년월일</span>
+          </div>
+          <span className="truncate text-captionDefault text-contents-default-primary">06. 10. 16</span>
         </div>
       </div>
       <Line className="text-background-base-border" />

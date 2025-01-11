@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import ChatInput from "../components/chat/ChatInput";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import Header from "../components/common/Header";
 
 const Chat = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,18 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col h-full">
+      <Header justify="between">
+        <div className="flex items-center gap-2">
+          <img src="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" alt="이미지" className="object-cover w-8 h-8 rounded-full" />
+          <div className="flex flex-col">
+            <span className="text-captionAccent">원하늘</span>
+            <span className="text-captionDefault">21살</span>
+          </div>
+        </div>
+        <span className="material-icons !text-[28px] text-contents-default-quaternary">
+          traffic
+        </span>
+      </Header>
       <div
         className="flex flex-col flex-1 px-4 overflow-y-auto"
         ref={scrollRef}
