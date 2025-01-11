@@ -1,11 +1,25 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatInput from "../components/chat/ChatInput";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import Header from "../components/common/Header";
+import LightModal from "../components/chat/LightModal";
+import ChatModal from "../components/chat/ChatModal";
+import { useNavigate } from "react-router";
 
 const Chat = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [chatStatus, setChatStatus] = useState<null | 'green' | 'red'>(null);
+  const navigate = useNavigate()
+
+  const onModal = (status?: 'red' | 'green') => {
+    if (status) {
+      setChatStatus(status)
+    } else {
+      setIsModalOpen(prev => !prev);
+    }
+  };
 
   useEffect(() => {
     if (scrollRef.current)
@@ -14,6 +28,12 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col h-full">
+      {isModalOpen &&
+        (chatStatus ?
+          <ChatModal onModal={() => navigate('/match')} status={chatStatus || "yellow"} name="하은" />
+          : <LightModal onModal={onModal} />
+        )
+      }
       <Header justify="between">
         <div className="flex items-center gap-2">
           <img src="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" alt="이미지" className="object-cover w-8 h-8 rounded-full" />
@@ -22,7 +42,7 @@ const Chat = () => {
             <span className="text-captionDefault">21살</span>
           </div>
         </div>
-        <span className="material-icons !text-[28px] text-contents-default-quaternary">
+        <span className="material-icons !text-[28px] text-contents-default-quaternary cursor-pointer" onClick={() => onModal()}>
           traffic
         </span>
       </Header>
