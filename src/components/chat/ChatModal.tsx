@@ -73,7 +73,7 @@ const ChatStatusInfo = {
 const ChatModal = ({ onModal, status, name }: props) => {
     const data = ChatStatusInfo[status](name)
     return (
-        <div className={`absolute z-50 w-full h-full flex flex-col gap-4 px-4 pt-12 pb-4 ${data.bgColor}`}>
+        <div className={`absolute z-50 top-0 left-0 w-full h-full flex flex-col gap-4 px-4 pt-12 pb-4 ${data.bgColor}`}>
             <div>
                 <div className="mt-4 mb-1 ">
                     <span className={`text-displayDefault ${data.textColor}`}>{data.title[0]}</span>

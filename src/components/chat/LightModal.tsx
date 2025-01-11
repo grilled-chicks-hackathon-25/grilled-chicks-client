@@ -6,7 +6,7 @@ interface props {
 
 const LightModal = ({ onModal }: props) => {
     return (
-        <div className="absolute z-50 flex flex-col w-full h-full bg-background-base-default">
+        <div className="absolute top-0 left-0 z-50 flex flex-col w-full h-full bg-background-base-default">
             <Header justify="start">
                 <button className="material-icons text-contents-default-quaternary !text-[28px]" onClick={() => onModal()}>
                     arrow_back_ios
