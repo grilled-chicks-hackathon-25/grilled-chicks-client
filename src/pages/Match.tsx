@@ -1,52 +1,67 @@
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
 import ProfileCard from "../components/match/ProfileCard";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import Header from "../components/common/Header";
-
-const porfile = [
-  {
-    image: "https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png",
-    name: "원하늘",
-    age: 23,
-    school: "계원예술대학교 디지털미디어디자인과",
-    mbti: "ESTJ",
-  },
-  {
-    image: "https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png",
-    name: "원하늘",
-    age: 23,
-    school: "계원예술대학교 디지털미디어디자인과",
-    mbti: "ESTJ",
-  },
-  {
-    image: "https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png",
-    name: "원하늘",
-    age: 23,
-    school: "계원예술대학교 디지털미디어디자인과",
-    mbti: "ESTJ",
-  },
-  {
-    image: "https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png",
-    name: "원하늘",
-    age: 23,
-    school: "계원예술대학교 디지털미디어디자인과",
-    mbti: "ESTJ",
-  },
-  {
-    image: "https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png",
-    name: "원하늘",
-    age: 23,
-    school: "계원예술대학교 디지털미디어디자인과",
-    mbti: "ESTJ",
-  },
-];
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { GetUserInfo } from "../api/user";
+import { GetList, GetSkipUser, IGetListProps } from "../api/match";
+import { calculateAge } from "../util/age";
+import InputModal from "../components/match/InputModal";
 
 function Match() {
   const swiperRef = useRef<SwiperRef | null>(null);
+  const [profileList, setProfileList] = useState<IGetListProps[]>([]);
+  const [now, setNow] = useState<number>(0);
+
+  const { data } = useQuery({
+    queryKey: ["user-info"],
+    queryFn: GetUserInfo,
+  });
+  const { data: listData, refetch } = useQuery({
+    queryKey: ["matchList"],
+    queryFn: () => GetList(data.userId),
+    enabled: true,
+  });
+  useEffect(() => {
+    refetch();
+  }, [data]);
+
+  useEffect(() => {
+    setProfileList([...profileList, ...(listData || [])]);
+  }, [listData]);
+
+  useEffect(() => {}, [now]);
+
+  const { mutate } = useMutation({
+    mutationFn: () => GetSkipUser(data.userId, profileList[now].user_id),
+    onSuccess: (data) => {
+      setProfileList((prev) => [...prev, data]);
+    },
+  });
+  const skipUser = () => {
+    setNow((prev) => prev + 1);
+    mutate();
+  };
+
+  const [inputVal, setInputVal] = useState<string>("");
+  const [isMessageOpen, setIsMessageOpen] = useState<boolean>(false);
+
+  const parentClick = () => {
+    setIsMessageOpen(!isMessageOpen);
+  };
   return (
     <>
+      {isMessageOpen && (
+        <InputModal
+          value={inputVal}
+          setValue={setInputVal}
+          onModal={parentClick}
+          id={profileList[now].user_id}
+          from={data.userId}
+        />
+      )}
       <Header justify="end">
         <span className="material-icons text-contents-status-unabled">
           filter_alt
@@ -62,13 +77,13 @@ function Match() {
         allowTouchMove={false}
         initialSlide={0}
       >
-        {porfile.map((item) => (
-          <SwiperSlide className="px-4 w-fit">
+        {profileList.map((item) => (
+          <SwiperSlide className="px-4 w-fit" key={item.user_id}>
             <ProfileCard
-              imgUrl={item.image}
-              name={item.name}
-              age={item.age}
-              school={item.school}
+              imgUrl={item.imgs[0].img_url}
+              name={item.username}
+              age={calculateAge(item.birth)}
+              school={item.unive}
               mbti={item.mbti}
             />
           </SwiperSlide>
@@ -82,7 +97,10 @@ function Match() {
         </div>
         <div className="flex items-center justify-center w-full gap-1 p-2 border rounded-full border-background-base-border bg-background-base-elevated">
           <button
-            onClick={() => swiperRef.current?.swiper.slideNext()}
+            onClick={() => {
+              swiperRef.current?.swiper.slideNext();
+              skipUser();
+            }}
             className="w-full items-center justify-center p-2 border rounded-full h-[60px] flex border-background-base-border bg-[#F34027]"
           >
             <span className="material-icons !text-[28px] text-[#FFFFFF]">
@@ -90,14 +108,17 @@ function Match() {
             </span>
           </button>
           <Link
-            to={`/match/12`}
+            to={`/match/${profileList[now]?.user_id}`}
             className="w-full items-center justify-center p-2 border rounded-full h-[60px] flex border-background-base-border bg-[#F3F327]"
           >
             <span className="material-icons !text-[28px] text-[#000000]">
               account_circle
             </span>
           </Link>
-          <button className="w-full items-center justify-center p-2 border rounded-full h-[60px] flex border-background-base-border bg-[#47EF44]">
+          <button
+            onClick={parentClick}
+            className="w-full items-center justify-center p-2 border rounded-full h-[60px] flex border-background-base-border bg-[#47EF44]"
+          >
             <span className="material-icons !text-[28px] text-[#FFFFFF]">
               mode_comment
             </span>

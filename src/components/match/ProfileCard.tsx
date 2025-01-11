@@ -12,7 +12,7 @@ const ProfileCard = ({ imgUrl, name, age, school, mbti }: props) => {
       <img
         src={imgUrl}
         alt="유저 이미지"
-        className="w-full h-full max-w-[345px] max-h-[345px] aspect-square object-cover rounded-xl"
+        className="w-[345px] h-[345px] aspect-square object-cover rounded-xl"
       />
       <div className="flex flex-col gap-1 px-1 py-2">
         <div className="flex justify-end">

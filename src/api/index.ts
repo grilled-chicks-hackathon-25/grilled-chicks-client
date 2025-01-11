@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 import { Storage } from "../Storage";
 
-const baseUrl = `https://08eb-210-94-220-230.ngrok-free.app/api`;
+const baseUrl = `https://0ee6-210-94-220-230.ngrok-free.app/api/`;
 export const BaseInstance: AxiosInstance = axios.create({
   baseURL: baseUrl,
   timeout: 10000,

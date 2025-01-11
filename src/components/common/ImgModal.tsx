@@ -4,7 +4,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
 interface props {
-  src: string[];
+  src: {
+    imgId: number;
+    imgUrl: string;
+  }[];
   onModal?: () => void;
 }
 const ImgModal = ({ src, onModal }: props) => {
@@ -31,7 +34,7 @@ const ImgModal = ({ src, onModal }: props) => {
         <div>
           {src.map((srcItem, idx) => (
             <SwiperSlide key={idx}>
-              <BgImg src={srcItem} className={`w-[361px] h-[624px]`} />
+              <BgImg src={srcItem.imgUrl} className={`w-[361px] h-[624px]`} />
             </SwiperSlide>
           ))}
         </div>
