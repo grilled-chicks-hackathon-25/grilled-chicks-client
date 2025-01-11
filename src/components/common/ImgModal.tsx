@@ -29,8 +29,8 @@ const ImgModal = ({ src, onModal }: props) => {
         className="mySwiper"
       >
         <div>
-          {src.map((srcItem) => (
-            <SwiperSlide>
+          {src.map((srcItem, idx) => (
+            <SwiperSlide key={idx}>
               <BgImg src={srcItem} className={`w-[361px] h-[624px]`} />
             </SwiperSlide>
           ))}

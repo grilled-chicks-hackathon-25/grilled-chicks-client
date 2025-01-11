@@ -3,6 +3,7 @@ import Landing from "./pages/Landing";
 import { Layout } from "./components/common";
 import MatchDetail from "./pages/MatchDetail";
 import Match from "./pages/Match";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/match" element={<Match />} />
         <Route path="/match/:id" element={<MatchDetail />} />
-        <Route path="/chat" element={<>chat</>} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/community" element={<>community</>} />
         <Route path="/profile" element={<>profile</>} />
       </Route>
