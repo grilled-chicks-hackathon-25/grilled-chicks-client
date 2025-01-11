@@ -1,22 +1,59 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatInput from "../components/chat/ChatInput";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import Header from "../components/common/Header";
+import { useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { GetChatMessage } from "../api/chat";
 
 const Chat = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { roomId } = useParams();
 
   useEffect(() => {
     if (scrollRef.current)
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   });
 
+  // const [messages, setMessages] = useState<string[]>([]);
+  // const webSocket = useRef<WebSocket | null>(null);
+
+  // useEffect(() => {
+  //   webSocket.current = new WebSocket(`ws://t08eb-210-94-220-230.ngrok-free.app/api/opic/room/${roomId}/messages`);
+  //   webSocket.current.onopen = () => {
+  //     console.log("WebSocket 연결!");
+  //   };
+  //   webSocket.current.onclose = (error) => {
+  //     console.log(error);
+  //   };
+  //   webSocket.current.onerror = (error) => {
+  //     console.log(error);
+  //   };
+  //   webSocket.current.onmessage = (event: MessageEvent) => {
+  //     setMessages((prev) => [...prev, event.data]);
+  //   };
+
+  //   return () => {
+  //     webSocket.current?.close();
+  //   };
+  // }, []);
+
+  const { data } = useQuery({
+    queryKey: ["chat"],
+    queryFn: () => GetChatMessage(Number(roomId)),
+  });
+  console.log(data);
+
   return (
     <div className="flex flex-col h-full">
       <Header justify="between">
         <div className="flex items-center gap-2">
-          <img src="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png" alt="이미지" className="object-cover w-8 h-8 rounded-full" />
+          <img
+            src="https://chicken25.s3.ap-northeast-2.amazonaws.com/1_1.png"
+            alt="이미지"
+            className="object-cover w-8 h-8 rounded-full"
+          />
           <div className="flex flex-col">
             <span className="text-captionAccent">원하늘</span>
             <span className="text-captionDefault">21살</span>
@@ -31,43 +68,6 @@ const Chat = () => {
         ref={scrollRef}
       >
         <ChatBubble isMe={false}>주말에 같이 시장 가서 장 볼래?</ChatBubble>
-        <ChatBubble isMe={true}>
-          네가 취미로 시작한 요리, 정말 실력이 늘었더라!
-        </ChatBubble>
-        <ChatBubble isMe={true}>이번 주말에 가족끼리 나들이 갈까? </ChatBubble>
-        <ChatBubble isMe={true}>
-          요즘 취업 준비하느라 힘들어 보이는데, 괜찮아?
-        </ChatBubble>
-        <ChatBubble isMe={false}>
-          이번 주 7시에 다 같이 모여서 저녁 먹자
-        </ChatBubble>
-        <ChatBubble isMe={false}>
-          이번 명절에 다 같이 모이면 좋겠어~!
-        </ChatBubble>
-        <ChatBubble isMe={true}>내일 같이 영화 한 편 볼까?</ChatBubble>
-        <ChatBubble isMe={true}>
-          오늘 학교에서 무슨 일 있었니? 오늘 저녁에 다 같이 보드게임 할까? 엄마,
-          오늘 저녁은 제가 요리할게
-        </ChatBubble>
-        <ChatBubble isMe={false}>
-          이번 주 7시에 다 같이 모여서 저녁 먹자
-        </ChatBubble>
-        <ChatBubble isMe={false}>
-          이번 명절에 다 같이 모이면 좋겠어~!
-        </ChatBubble>
-        <ChatBubble isMe={false}>
-          이번 주 7시에 다 같이 모여서 저녁 먹자
-        </ChatBubble>
-        <ChatBubble isMe={true}>
-          오늘 학교에서 무슨 일 있었니? 오늘 저녁에 다 같이 보드게임 할까? 엄마,
-          오늘 저녁은 제가 요리할게
-        </ChatBubble>
-        <ChatBubble isMe={false}>
-          이번 명절에 다 같이 모이면 좋겠어~!
-        </ChatBubble>
-        <ChatBubble isMe={false}>
-          이번 주 7시에 다 같이 모여서 저녁 먹자
-        </ChatBubble>
       </div>
       <ChatInput />
     </div>
