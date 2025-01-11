@@ -2,16 +2,17 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { EffectCards } from 'swiper/modules';
 import ProfileCard from "../components/match/ProfileCard";
 import { useRef } from 'react';
+import Header from '../components/common/Header';
 
 function Match() {
     const swiperRef = useRef<SwiperRef | null>(null);
     return (
         <>
-            <div className="w-full py-1.5 px-4 flex justify-end">
+            <Header justify='end'>
                 <span className="material-icons text-contents-status-unabled">
                     filter_alt
                 </span>
-            </div>
+            </Header>
             <Swiper
                 ref={swiperRef}
                 className='w-full px-4 mt-4'
