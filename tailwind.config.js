@@ -64,97 +64,26 @@ module.exports = {
       },
     },
     fontSize: {
-      headlineLarge: [
-        "64px",
-        {
-          fontWeight: 800,
-          lineHeight: "80px",
-        },
-      ],
-      headlineMedium: [
-        "48px",
-        {
-          fontWeight: 700,
-          lineHeight: "64px",
-        },
-      ],
-      headlineSmall: [
-        "40px",
-        {
-          fontWeight: 600,
-          lineHeight: "52px",
-        },
-      ],
-      titleLarge: [
-        "36px",
-        {
-          fontWeight: 600,
-          lineHeight: "48px",
-        },
-      ],
-      titleMedium: [
-        "24px",
-        {
-          fontWeight: 600,
-          lineHeight: "32px",
-        },
-      ],
-      titleSmall: [
-        "16px",
-        {
-          fontWeight: 600,
-          lineHeight: "24px",
-        },
-      ],
-      bodyLarge: [
-        "20px",
-        {
-          fontWeight: 400,
-          lineHeight: "24px",
-        },
-      ],
-      bodyMedium: [
-        "16px",
-        {
-          fontWeight: 400,
-          lineHeight: "20px",
-        },
-      ],
-      bodySmall: [
-        "14px",
-        {
-          fontWeight: 400,
-          lineHeight: "18px",
-        },
-      ],
-      bodyTiny: [
-        "12px",
-        {
-          fontWeight: 400,
-          lineHeight: "16px",
-        },
-      ],
-      labelLarge: [
-        "20px",
-        {
-          fontWeight: 500,
-          lineHeight: "24px",
-        },
-      ],
-      labelMedium: [
-        "16px",
-        {
-          fontWeight: 500,
-          lineHeight: "20px",
-        },
-      ],
-      labelSmall: [
-        "14px",
-        {
-          fontWeight: 500,
-          lineHeight: "18px",
-        },
-      ],
+      displayDefault: ["48px", { fontWeight: 500, lineHeight: "60px" }],
+      displayAccent: ["48px", { fontWeight: 600, lineHeight: "60px" }],
+
+      headlineDefault: ["32px", { fontWeight: 500, lineHeight: "40px" }],
+      headlineAccent: ["32px", { fontWeight: 600, lineHeight: "40px" }],
+
+      headingDefault: ["26px", { fontWeight: 500, lineHeight: "32px" }],
+      headingAccent: ["26px", { fontWeight: 600, lineHeight: "32px" }],
+
+      titleDefault: ["18px", { fontWeight: 500, lineHeight: "26px" }],
+      titleAccent: ["18px", { fontWeight: 600, lineHeight: "26px" }],
+
+      bodyDefault: ["16px", { fontWeight: 500, lineHeight: "24px" }],
+      bodyAccent: ["16px", { fontWeight: 600, lineHeight: "24px" }],
+
+      captionDefault: ["14px", { fontWeight: 500, lineHeight: "20px" }],
+      captionAccent: ["14px", { fontWeight: 600, lineHeight: "20px" }],
+
+      footnoteDefault: ["12px", { fontWeight: 500, lineHeight: "16px" }],
+      footnoteAccent: ["12px", { fontWeight: 600, lineHeight: "16px" }],
     },
     screens: {
       fold: { max: "375px" },

@@ -87,7 +87,7 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  font-family: Pretendard-Medium;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -134,4 +134,16 @@ table {
   padding: 0;
   box-sizing: border-box;
   color: #101016;
+}
+
+.material-icons {
+  font-weight: 200;
+  font-size: 24px;
+}
+
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("./assets/font/Pretendard-Medium.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
 }
