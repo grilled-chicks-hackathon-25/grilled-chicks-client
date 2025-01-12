@@ -11,7 +11,7 @@ import * as StompJs from "@stomp/stompjs";
 
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { GetChatMessage } from "../api/chat";
+import { GetChatMessage, IresChatMessageGetApi } from "../api/chat";
 import { Storage } from "../Storage";
 import Stomp from "@stomp/stompjs";
 import { Client } from "@stomp/stompjs";
@@ -28,12 +28,13 @@ const client = new StompJs.Client({
   heartbeatOutgoing: 4000,
 });
 
-interface Content {
-  content: string;
-  sender?: string;
-}
-
 const Chat = () => {
+  const [state, setState] = useState("free");
+  useEffect(() => {
+    const stateStore = Storage.getItem("wow");
+    if (stateStore) setState("nope");
+  }, []);
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const { id: roomId } = useParams();
 
@@ -59,7 +60,7 @@ const Chat = () => {
   const [chatList, setChatList] = useState<string[]>([]);
 
   const [stompClient, setStompClient] = useState<Stomp.Client | null>(null);
-  const [messages, setMessages] = useState<Content[]>([]);
+  const [messages, setMessages] = useState<IresChatMessageGetApi[]>([]);
 
   const connect = () => {
     const token = Storage.getItem("access_token");
@@ -119,10 +120,13 @@ const Chat = () => {
     return () => disConnect();
   }, []);
 
-  // const { data } = useQuery({
-  //   queryKey: ["chat"],
-  //   queryFn: () => GetChatMessage(Number(roomId)),
-  // });
+  const { data: InitialMessage } = useQuery({
+    queryKey: ["chat"],
+    queryFn: () => GetChatMessage(Number(roomId)),
+  });
+  useEffect(() => {
+    setMessages(InitialMessage);
+  }, [InitialMessage]);
 
   return (
     <div className="flex flex-col h-full">

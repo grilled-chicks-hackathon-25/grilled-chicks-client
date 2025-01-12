@@ -1,6 +1,6 @@
 import { BaseInstance } from ".";
 
-interface IresChatMessageGetApi {
+export interface IresChatMessageGetApi {
   messageId: number;
   content: string;
   mine: boolean;
@@ -9,7 +9,7 @@ interface IresChatMessageGetApi {
 
 const GetChatMessage = async (
   roomId: number
-): Promise<IresChatMessageGetApi> => {
+): Promise<IresChatMessageGetApi[]> => {
   const { data } = await BaseInstance.get(`/chat/${roomId}/messages`);
   return data;
 };

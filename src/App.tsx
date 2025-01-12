@@ -6,12 +6,14 @@ import Match from "./pages/Match";
 import Chat from "./pages/Chat";
 import Community from "./pages/Community";
 import ChatList from "./pages/ChatList";
+import Wait from "./pages/Wait";
 
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/wait" element={<Wait />} />
       <Route element={<Layout />}>
-        <Route path="/" element={<Landing />} />
         <Route path="/match" element={<Match />} />
         <Route path="/match/:id" element={<MatchDetail />} />
         <Route path="/chat" element={<ChatList />} />

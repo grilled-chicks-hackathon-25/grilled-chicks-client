@@ -4,7 +4,7 @@ const navItem = [
   { label: "매칭", href: "/match", icon: "dashboard" },
   { label: "채팅", href: "/chat", icon: "forum" },
   { label: "커뮤니티", href: "/community", icon: "language" },
-  { label: "프로필", href: "/profile", icon: "person" },
+  // { label: "프로필", href: "/profile", icon: "person" },
 ];
 const regex = /^\/([^/]+)/;
 
