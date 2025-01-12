@@ -1,4 +1,4 @@
-type LocalStorageKey = "access_token" | "wow";
+type LocalStorageKey = "access_token" | "wow" | "com";
 
 export class Storage {
   private static isWindowAvailable() {

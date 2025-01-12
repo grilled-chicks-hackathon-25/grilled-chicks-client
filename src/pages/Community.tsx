@@ -1,14 +1,31 @@
 import { useNavigate } from "react-router";
 import Header from "../components/common/Header";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Storage } from "../Storage";
+import { css } from "@emotion/react";
 
 const Community = () => {
   const navigate = useNavigate();
-  const isDone = false;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isDone, setIsOpen] = useState<boolean>(false);
+
+  const [yes, setYes] = useState("");
+  useEffect(() => {
+    setYes(Storage.getItem("com") || "");
+  }, []);
+  useEffect(() => {
+    if (yes === "true") setIsOpen(true);
+    else setIsOpen(false);
+  }, [yes]);
+  useEffect(() => {
+    if (isDone) Storage.setItem("com", "true");
+  }, [isDone]);
   const openInput = () => {
     if (isDone) setIsOpen(true);
+    else {
+      prompt("답변을 입력해주세요");
+      setIsOpen(true);
+    }
   };
 
   return (
@@ -42,7 +59,7 @@ const Community = () => {
           </p>
         </div>
       </div>
-      <BeforeContent className="min-h-[472px] px-4 relative">
+      <BeforeContent isDone={isDone} className="min-h-[472px] px-4 relative">
         <div className="p-4 rounded-xl border-[1px] border-background-base-border bg-white mb-1">
           <div className="flex gap-1">
             <img src="" alt="" className="w-8 h-8 rounded-full" />
@@ -80,16 +97,20 @@ const Community = () => {
 
 export default Community;
 
-const BeforeContent = styled.div`
-  ::before {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(217, 217, 217, 0.01);
-    backdrop-filter: blur(12px);
-  }
+const BeforeContent = styled.div<{ isDone: boolean }>`
+  ${({ isDone }) =>
+    !isDone &&
+    css`
+      ::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(217, 217, 217, 0.01);
+        backdrop-filter: blur(12px);
+      }
+    `}
 `;
